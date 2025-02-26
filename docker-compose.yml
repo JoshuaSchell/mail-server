@@ -1,0 +1,62 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    build:
+      context: ./postgres
+    container_name: ticket-db
+    environment:
+      # Pass database variables
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - ticket-network
+
+  # C Email Sender Service
+  email-sender:
+    build:
+      context: ./email-sender
+    container_name: email-sender
+    environment:
+      # Pass all database variables
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # Pass SMTP variables
+      GMAIL_EMAIL: ${GMAIL_EMAIL}
+      GMAIL_APP_PASSWORD: ${GMAIL_APP_PASSWORD}
+      SMTPS_SERVER: ${SMTPS_SERVER}
+      SMTPS_PORT: ${SMTPS_PORT}
+      SENDER_NAME: ${SENDER_NAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - ticket-network
+
+networks:
+  ticket-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

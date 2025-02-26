@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" << EOF
+GRANT ALL PRIVILEGES ON TABLE tickets TO $POSTGRES_USER;
+GRANT USAGE, SELECT ON SEQUENCE tickets_id_seq TO $POSTGRES_USER;
+EOF
