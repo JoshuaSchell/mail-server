@@ -34,6 +34,7 @@ Create a `.env` file in the project root with credentials that will be used cons
 
 ```
 # PostgreSQL configuration
+POSTGRES_HOST=postgres         # Standard default host for PostgreSQL 
 POSTGRES_USER=postgres         # Standard default user for PostgreSQL 
 POSTGRES_PASSWORD=postgres123  # Choose a secure password
 POSTGRES_DB=ticketdb           # Name of the database to create
@@ -42,8 +43,8 @@ POSTGRES_PORT=5432             # Internal port, not the mapped port
 # Gmail SMTP configuration
 GMAIL_EMAIL=your-email@gmail.com           # Your Gmail email address
 GMAIL_APP_PASSWORD=your-app-password       # App-specific password from Google (not your regular password)
-SMTP_SERVER=smtp.gmail.com                 # Gmail's SMTP server address
-SMTP_PORT=465                              # Port for SSL/TLS email encryption
+SMTPS_SERVER=smtp.gmail.com                 # Gmail's SMTP server address
+SMTPS_PORT=465                              # Port for SSL/TLS email encryption
 SENDER_NAME=OpenFarm                       # Display name shown to email recipients
 ```
 
@@ -91,6 +92,8 @@ docker-compose build --no-cache
 docker-compose up
 ```
 
+You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
+
 ## Basic Ticket Insertion
 
 To insert a new ticket into the database:
@@ -98,5 +101,3 @@ To insert a new ticket into the database:
 ```
 docker exec -it ticket-db psql -U postgres -d ticketdb -c "INSERT INTO tickets (email, subject, body) VALUES ('recipient@example.com', 'Test Subject', 'This is a test email body.');"
 ```
-
-You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
