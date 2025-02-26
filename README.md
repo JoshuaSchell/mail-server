@@ -1,6 +1,6 @@
 # mail-server - setup guide
 
-This guide provides instructions for setting up a PostgreSQL-based email ticket system that automatically sends emails when new tickets are inserted into the database, managed with docker containers.
+This guide provides instructions for setting up a PostgreSQL-based email ticket system that automatically sends emails when new tickets are inserted into the database, managed with Docker containers.
 
 ## Requirements
 
