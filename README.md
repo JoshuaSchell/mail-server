@@ -76,6 +76,8 @@ project-root/
     └── Makefile
 ```
 
+## From the project root directory
+
 ### Stop any existing containers
 
 ```
