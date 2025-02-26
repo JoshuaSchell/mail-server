@@ -91,5 +91,12 @@ docker-compose build --no-cache
 docker-compose up
 ```
 
+## Basic Ticket Insertion
+
+To insert a new ticket into the database:
+
+```
+docker exec -it ticket-db psql -U postgres -d ticketdb -c "INSERT INTO tickets (email, subject, body) VALUES ('recipient@example.com', 'Test Subject', 'This is a test email body.');"
+```
 
 You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
