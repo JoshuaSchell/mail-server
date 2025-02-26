@@ -102,8 +102,8 @@ You should see the following output:
 
 ```
 Running 3/3
- ✔ Network mail-server_ticket-network  Created                                                                                                                         
- ✔ Container ticket-db                 Created                                                                                                                         
+ ✔ Network mail-server_ticket-network  Created
+ ✔ Container ticket-db                 Created
  ✔ Container email-sender              Created
 ```
 
