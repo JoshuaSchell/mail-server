@@ -71,7 +71,7 @@ project-root/
     └── Makefile
 ```
 
-### Start a fresh deployment
+### Stop any existing containers
 
 ```
 docker-compose down
