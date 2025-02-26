@@ -43,8 +43,8 @@ POSTGRES_PORT=5432             # Internal port, not the mapped port
 # Gmail SMTP configuration
 GMAIL_EMAIL=your-email@gmail.com           # Your Gmail email address
 GMAIL_APP_PASSWORD=your-app-password       # App-specific password from Google (not your regular password)
-SMTPS_SERVER=smtp.gmail.com                 # Gmail's SMTP server address
-SMTPS_PORT=465                              # Port for SSL/TLS email encryption
+SMTPS_SERVER=smtp.gmail.com                # Gmail's SMTP server address
+SMTPS_PORT=465                             # Port for SSL/TLS email encryption
 SENDER_NAME=OpenFarm                       # Display name shown to email recipients
 ```
 
