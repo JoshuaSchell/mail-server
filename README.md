@@ -2,6 +2,10 @@
 
 This guide provides instructions for setting up a PostgreSQL-based email ticket system that automatically sends emails when new tickets are inserted into the database, with corrections for common connection issues.
 
+## Requirements
+
+![image](https://github.com/user-attachments/assets/20b18bcd-8db7-4e9d-92a2-d76cfa407d47)
+
 ## Project Overview
 
 This system consists of:
@@ -28,7 +32,7 @@ project-root/
 
 ## Step 1: Create Environment Configuration File
 
-### .env File
+### .env File (DO NOT SHARE THIS FILE WITH ANYONE)
 
 Create a `.env` file in the project root with credentials that will be used consistently across all services:
 
