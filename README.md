@@ -72,14 +72,24 @@ project-root/
 ```
 
 ### Start a fresh deployment
+
+```
 docker-compose down
+```
 
 ### Remove old volumes to ensure a clean state
+
+```
 docker volume rm $(docker volume ls -q | grep postgres_data) 2>/dev/null || true
+```
 
 ### Build and start the containers
+
+```
 docker-compose build --no-cache
-docker-compose up -d
+
+docker-compose up
+```
 
 
 You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
