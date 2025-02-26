@@ -101,7 +101,7 @@ Running 3/3
  ✔ Container email-sender              Created
 ```
 
-Furthermore, the database system is ready to accept connections
+Furthermore, the database system should be ready to accept connections
 
 ## Basic Ticket Insertion
 
