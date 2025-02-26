@@ -92,7 +92,16 @@ docker-compose build --no-cache
 docker-compose up
 ```
 
-You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
+You should see the following output:
+
+```
+Running 3/3
+ ✔ Network mail-server_ticket-network  Created                                                                                                                         
+ ✔ Container ticket-db                 Created                                                                                                                         
+ ✔ Container email-sender              Created
+```
+
+Furthermore, the database system is ready to accept connections
 
 ## Basic Ticket Insertion
 
