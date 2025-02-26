@@ -98,9 +98,9 @@ docker-compose build --no-cache
 
 ### Start the containers
 ```
-docker-compose up    # starts containers in shell foreground
+docker-compose up       # starts containers in shell foreground
 
-docker-compose up -d # starts containers in shell background
+docker-compose up -d    # starts containers in shell background
 ```
 
 You should see the following output:
