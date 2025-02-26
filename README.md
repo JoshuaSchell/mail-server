@@ -1,0 +1,85 @@
+# mail-server - setup guide
+
+This guide provides instructions for setting up a PostgreSQL-based email ticket system that automatically sends emails when new tickets are inserted into the database, with corrections for common connection issues.
+
+## Project Overview
+
+This system consists of:
+1. A PostgreSQL database for storing tickets
+2. A C program that monitors the database for new tickets and sends emails
+3. Docker containers to run both components
+
+## Project Structure
+
+```
+project-root/
+├── docker-compose.yml
+├── .env                  # You will need to create this file!! (Everything else is provided)
+├── postgres/
+│   ├── Dockerfile
+│   └── init-db/        
+│       ├── 01-init.sql
+│       └── 02-init.sh
+└── email-sender/
+    ├── Dockerfile
+    ├── email-sender.c
+    └── Makefile
+```
+
+## Step 1: Create Environment Configuration File
+
+### .env File
+
+Create a `.env` file in the project root with credentials that will be used consistently across all services:
+
+```
+# PostgreSQL configuration
+POSTGRES_USER=postgres         # Standard default user for PostgreSQL 
+POSTGRES_PASSWORD=postgres123  # Choose a secure password
+POSTGRES_DB=ticketdb           # Name of the database to create
+POSTGRES_PORT=5432             # Internal port, not the mapped port
+
+# Gmail SMTP configuration
+GMAIL_EMAIL=your-email@gmail.com           # Your Gmail email address
+GMAIL_APP_PASSWORD=your-app-password       # App-specific password from Google (not your regular password)
+SMTP_SERVER=smtp.gmail.com                 # Gmail's SMTP server address
+SMTP_PORT=465                              # Port for SSL/TLS email encryption
+SENDER_NAME=OpenFarm                       # Display name shown to email recipients
+```
+
+> **Important Note on Gmail App Password**: 
+> 1. This is NOT your regular Gmail password
+> 2. You need to have 2-factor authentication enabled on your Google account
+> 3. Generate an App Password at: https://myaccount.google.com/security > App passwords
+
+## Step 2: Build and Run the System
+After setting up all necessary files, follow these steps to build and run the email ticket system:
+
+Ensure all files are in place
+```
+project-root/
+├── docker-compose.yml
+├── .env
+├── postgres/
+│   ├── Dockerfile
+│   └── init-db/        
+│       ├── 01-init.sql
+│       └── 02-init.sh    
+└── email-sender/
+    ├── Dockerfile
+    ├── email-sender.c
+    └── Makefile
+```
+
+### Start a fresh deployment
+docker-compose down
+
+### Remove old volumes to ensure a clean state
+docker volume rm $(docker volume ls -q | grep postgres_data) 2>/dev/null || true
+
+### Build and start the containers
+docker-compose build --no-cache
+docker-compose up -d
+
+
+You should see output showing the PostgreSQL initialization, creation of database tables, and the email-sender connecting to the database successfully.
