@@ -119,5 +119,5 @@ Furthermore, the database system should be ready to accept connections
 To insert a new ticket into the database:
 
 ```
-docker exec -it ticket-db psql -U postgres -d ticketdb -c "INSERT INTO tickets (email, subject, body) VALUES ('recipient@example.com', 'Test Subject', 'This is a test email body.');"
+docker exec -it ticket-db psql -U <.env POSTGRES_USER> -d ticketdb -c "INSERT INTO tickets (email, subject, body) VALUES ('recipient@example.com', 'Test Subject', 'This is a test email body.');"
 ```
